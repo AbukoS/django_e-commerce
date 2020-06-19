@@ -1,0 +1,236 @@
+{% extends 'base.html' %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'main.css' %}">
+
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'main.css' %}">
+
+<style>
+.label{
+    position: absolute;
+    left: 20px;
+    top: 20px;
+    z-index: 2;
+}
+.label-right{
+    position: absolute;
+    background-color: rgba(240, 240, 100, 0.842) !important;
+    color: black !important;
+    right: 20px;
+    top: 20px;
+    z-index: 2;
+}
+.badge-right {
+    position: absolute;
+    right: 0;
+    top: 0;
+    height:25px;
+    width: 38px;
+    background-color: rgba(199, 207, 81, 0.884);
+    z-index: 2;
+    transition: 0.5s;
+}
+.cat-img {
+  width: 293px;
+  height: 193px;
+  transition: 0.5s;
+  object-fit: inherit;
+  overflow: hidden;
+}
+.categories,
+.best-sellers,
+.latest {
+  display: flex;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+}
+.categories img {
+  margin-bottom: 40px;
+  transition: 0.5s;
+}
+.cat-image{
+    position: relative;
+    width: 293px;
+    height: 193px;
+    margin-bottom: 40px;
+}
+.categories .cat-image h3{
+    position: absolute;
+    color: white;
+    font-weight: 400;
+    bottom: 0;
+    right: 10px;
+    z-index: 2;
+}
+</style>
+
+<!-- Banner  -->
+<div class="view full-page-intro mt-0 pt-0"
+     style="background-image: url('https://mdbootstrap.com/img/Photos/Others/images/78.jpg'); background-repeat: no-repeat; background-size: cover; height:50vh;">
+  <div class="mask rgba-black-light d-flex justify-content-center align-items-center">
+    <div class="container">
+      <h1 style="font-weight: 500;" class="text-center text-white">Welcome to Butek's online</h1>
+      <div class="row wow fadeIn text-white text-center">
+        <h4>where we redefine online shopping...enjoy the experience of our carefully cooked UI. You'll keep coming back
+          for more</h4>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Banner  -->
+
+
+<main class="mb-4">
+  <div class="container">
+    <section class="mt-5 wow fadeIn">
+
+      <h4 class="section-title">Categories</h4>
+      <div class="row best-sellers">
+        {% for category in categories %}
+         <div class="categories">
+            <div class="cat-image">
+              <h3 class="text-center">{{category.name}}</h3>
+              <img src="{{category.thumbnail.url}}" class="cat-img rounded " alt="">
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+
+      <!-- Best sellers -->
+      <h4 class="section-title">Best Sellers</h4>
+      <div class="row best-sellers">
+        {% for shirt in shirts %}
+          <div class="best-img" style="position: relative;">
+            <h5><span class="label badge badge-pill badge-primary">Primary</span></h5>
+            <h5><span class="label-right badge  badge-primary">-20%</span></h5>
+            <!-- <span class="badge-right text-center"><b>-20%</b></span> -->
+            <a href="{% url 'detail' shirt.slug %}">
+              <img src="{{shirt.image.url}}" class="rounded fluid" alt="">
+            </a>
+            <h6 class="text-center mt-3"><b>{{shirt.title}}</b></h6>
+            <p class="text-center text-muted"><b><small>{{shirt.category.name|upper}}</small></b></p>
+
+            <p class=" rating text-center mt-0">
+              {% if shirt.rating.value == 5 %}
+              <span><i class="fas fa-star text-primary"></i></span>
+              <span><i class="fas fa-star text-primary"></i></span>
+              <span><i class="fas fa-star text-primary"></i></span>
+              <span><i class="fas fa-star text-primary"></i></span>
+              <span><i class="fas fa-star text-primary"></i></span>
+              {% endif %}
+              {% if shirt.rating.value == 4 %}
+              <span><i class="fas fa-star text-primary"></i></span>
+              <span><i class="fas fa-star text-primary"></i></span>
+              <span><i class="fas fa-star text-primary"></i></span>
+              <span><i class="fas fa-star text-primary"></i></span>
+              <span><i class="far fa-star text-primary"></i></span>
+              {% endif %}
+              {% if shirt.rating.value == 3 %}
+              <span><i class="fas fa-star text-primary"></i></span>
+              <span><i class="fas fa-star text-primary"></i></span>
+              <span><i class="fas fa-star text-primary"></i></span>
+              <span><i class="far fa-star text-primary"></i></span>
+              <span><i class="far fa-star text-primary"></i></span>
+              {% endif %}
+              {% if shirt.rating.value == 2 %}
+              <span><i class="fas fa-star text-primary"></i></span>
+              <span><i class="fas fa-star text-primary"></i></span>
+              <span><i class="far fa-star text-primary"></i></span>
+              <span><i class="far fa-star text-primary"></i></span>
+              <span><i class="far fa-star text-primary"></i></span>
+              {% endif %}
+            </p>
+
+            <hr>
+
+            <p class=" rating text-center mt-0"><b style="font-weight: 450;">${{shirt.discount_price}}</b>
+              <del class="text-muted"><b>${{shirt.price}}</b></del>
+            </p>
+            <p class=" rating text-center mt-0 pt-0 py-0">
+              <a href="{% url 'detail' shirt.slug %}">
+                <button class="btn btn-primary rounded btn-sm ml-0 mr-0"><i class="fas fa-shopping-cart"></i> ADD TO CART
+                </button>
+              </a>
+              <a href="#">
+                <button class="btn btn-oultine-info rounded btn-sm ml-0 mr-0"><i class="fas fa-info-circle"></i> Details
+                </button>
+              </a>
+              <button class="btn btn-danger btn-sm rounded text-centre ml-0"><i class="far fa-heart"></i></button>
+            </p>
+          </div>
+        {% endfor %}
+      </div>
+      <!-- Best sellers -->
+
+      <!-- New products -->
+      <h4 class="section-title">New products</h4>
+      <div class="row best-sellers">
+        {% for item in new_products %}
+          <div class="best-img" style="position: relative;">
+            <h5><span class="label badge badge-pill badge-primary">Primary</span></h5>
+            <h5><span class="label-right badge  badge-primary">-20%</span></h5>
+            <!-- <span class="badge-right text-center"><b>-20%</b></span> -->
+            <a href="{% url 'detail' item.slug %}">
+              <img src="{{item.image.url}}" class="rounded fluid" alt="">
+            </a>
+            <h6 class="text-center mt-3"><b>{{item.title}}</b></h6>
+            <p class="text-center text-muted"><b><small>{{item.category|upper}}</small></b></p>
+
+            <p class=" rating text-center mt-0">
+              {% if item.rating.value == 5 %}
+              <span><i class="fas fa-star text-primary"></i></span>
+              <span><i class="fas fa-star text-primary"></i></span>
+              <span><i class="fas fa-star text-primary"></i></span>
+              <span><i class="fas fa-star text-primary"></i></span>
+              <span><i class="fas fa-star text-primary"></i></span>
+              {% endif %}
+              {% if item.rating.value == 4 %}
+              <span><i class="fas fa-star text-primary"></i></span>
+              <span><i class="fas fa-star text-primary"></i></span>
+              <span><i class="fas fa-star text-primary"></i></span>
+              <span><i class="fas fa-star text-primary"></i></span>
+              <span><i class="far fa-star text-primary"></i></span>
+              {% endif %}
+              {% if item.rating.value == 3 %}
+              <span><i class="fas fa-star text-primary"></i></span>
+              <span><i class="fas fa-star text-primary"></i></span>
+              <span><i class="fas fa-star text-primary"></i></span>
+              <span><i class="far fa-star text-primary"></i></span>
+              <span><i class="far fa-star text-primary"></i></span>
+              {% endif %}
+              {% if item.rating.value == 2 %}
+              <span><i class="fas fa-star text-primary"></i></span>
+              <span><i class="fas fa-star text-primary"></i></span>
+              <span><i class="far fa-star text-primary"></i></span>
+              <span><i class="far fa-star text-primary"></i></span>
+              <span><i class="far fa-star text-primary"></i></span>
+              {% endif %}
+            </p>
+
+            <hr>
+
+            <p class=" rating text-center mt-0"><b style="font-weight: 450;" class="">${{item.discount_price}}</b>
+              <del class="text-muted"><b>${{item.price}}</b></del>
+            </p>
+            <p class=" rating text-center mt-0 pt-0 py-0">
+              <a href="{% url 'detail' item.slug %}">
+                <button class="btn btn-primary rounded btn-sm ml-0 mr-0"><i class="fas fa-shopping-cart"></i> ADD TO CART
+                </button>
+              </a>
+              <a href="#">
+                <button class="btn btn-oultine-info rounded btn-sm ml-0 mr-0"><i class="fas fa-info-circle"></i> Details
+                </button>
+              </a>
+              <button class="btn btn-danger btn-sm rounded text-centre ml-0"><i class="far fa-heart"></i></button>
+            </p>
+          </div>
+        {% endfor %}
+      </div>
+      <!-- New products -->
+
+    </section>
+  </div>
+</main>
+
+{% endblock content %}

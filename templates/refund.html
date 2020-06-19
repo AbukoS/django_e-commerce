@@ -1,0 +1,139 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<style>
+  .form {
+    display: none;
+  }
+</style>
+<main>
+  <div class="container wow fadeIn">
+    <div class="row">
+      <div class="col-md-8 mb-4">
+        <h2 class="h2">Request refund</h2>
+        <ol>
+          <li>
+            <strong
+              >Lorem ipsum dolor sit amet consectetur adipisicing elit.
+              Blanditiis quos quas ut voluptatibus praesentium numquam, sit
+              odio, qui, autem animi aspernatur ea porro labore enim ducimus
+              atque at! Culpa, non?</strong
+            >Lorem ipsum dolor sit amet consectetur, adipisicing elit. Libero
+            cumque voluptatibus dignissimos magnam quos eveniet optio sint,
+            voluptates reiciendis ex.
+          </li>
+          <li>
+            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Libero
+            cumque voluptatibus dignissimos magnam quos eveniet optio sint,
+            voluptates reiciendis ex.
+          </li>
+          <li>
+            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Libero
+            cumque voluptatibus dignissimos magnam quos eveniet optio sint,
+            voluptates reiciendis ex.
+          </li>
+          <li>
+            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Libero
+            cumque voluptatibus dignissimos magnam quos eveniet optio sint,
+            voluptates reiciendis ex.
+          </li>
+          <li>
+            Lorem ipsum dolor sit amet
+            <b>consectetur, adipisicing elit.</b> Libero cumque voluptatibus
+            dignissimos magnam quos eveniet optio sint, voluptates reiciendis
+            ex.
+          </li>
+          <li>
+            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Libero
+            cumque voluptatibus dignissimos magnam quos eveniet optio sint,
+            voluptates reiciendis ex.
+          </li>
+          <li>
+            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Libero
+            cumque voluptatibus dignissimos magnam quos eveniet optio sint,
+            voluptates reiciendis ex.
+          </li>
+          <li>
+            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Libero
+            cumque voluptatibus dignissimos magnam quos eveniet optio sint,
+            voluptates reiciendis ex.
+          </li>
+        </ol>
+        <p>
+          If you satisfy all the specified conditions above the click the
+          request button and fill in the reference code of your
+          <strong
+            >order, your email and a reason as to why you are requesting the
+            refund</strong
+          >
+        </p>
+        <!-- <button class="btn btn-info btn-sm" id="request-btn">Request</button>
+        <div class="card px-4 mt-2">
+          <form method="POST" class="mt-3 mb-4 form" id="hideable-form">
+            {% csrf_token %} {{form|crispy}}
+            <button type="submit" class="btn btn-info">Submit</button>
+          </form>
+        </div> -->
+
+        <div class="modal fade" id="modalRegisterForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+          aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <form method="POST">
+                {% csrf_token %}
+                <div class="modal-header text-center">
+                  <h4 class="modal-title w-100 font-weight-bold">Request Refund</h4>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body mx-3">
+                  <div class="md-form mb-5">
+                    <i class="fas fa-terminal prefix grey-text"></i>
+                    <!-- <input type="text" id="orangeForm-name" class="form-control validate"> -->
+                    {{form.code}}
+                    <label data-error="wrong" data-success="right" for="orangeForm-name">Reference code</label>
+                  </div>
+                  <div class="md-form mb-5">
+                    <i class="fas fa-envelope prefix grey-text"></i>
+                    <!-- <input type="email" id="orangeForm-email" class="form-control validate"> -->
+                    {{form.email}}
+                    <label data-error="wrong" data-success="right" for="orangeForm-email">Your email</label>
+                  </div>
+
+                  <div class="md-form mb-4">
+                    <div class="md-form">
+                      <i class="fas fa-pencil-alt prefix"></i>
+                      <textarea name="reason" id="form10" class="md-textarea form-control" rows="3"></textarea>
+                      <label for="form10">Your reason</label>
+                    </div>
+                  </div>
+                </div>
+                <div class="modal-footer d-flex justify-content-center">
+                  <button class="btn btn-info" type="submit">Submit</button>
+                </div>
+            </form>
+
+            </div>
+          </div>
+        </div>
+
+        <div class="text-center">
+          <a href="" class="btn btn-info btn-sm btn-rounded mb-4" data-toggle="modal" data-target="#modalRegisterForm">Request</a>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</main>
+<script>
+  var btn = document.getElementById("request-btn");
+  var form = document.getElementById("hideable-form");
+
+  btn.addEventListener("click", (e) => {
+    e.preventDefault();
+    form.classList.toggle("form");
+  });
+</script>
+{% endblock content %}

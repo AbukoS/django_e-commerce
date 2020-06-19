@@ -1,0 +1,307 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<style type="text/css">
+.label-right{
+  position: absolute;
+  background-color: rgba(240, 240, 100, 0.842) !important;
+  color: black !important;
+  right: 20px;
+  top: 20px;
+  z-index: 2;
+}
+.badge-right {
+  position: absolute;
+  right: 0;
+  top: 0;
+  height:25px;
+  width: 38px;
+  background-color: rgba(199, 207, 81, 0.884);
+  z-index: 2;
+  transition: 0.5s;
+}
+.cat-image{
+  position: relative;
+  width: 293px;
+  height: 193px;
+  margin-bottom: 40px;
+}
+.categories .cat-image h3{
+  position: absolute;
+  color: white;
+  font-weight: 400;
+  bottom: 0;
+  right: 10px;
+  z-index: 2;
+}
+
+</style>
+
+<main class="mb-5">
+  <div class="container">
+    <section class="mt-5 wow fadeIn">
+      <div>
+        <h4 class="section-title">Shop</h4>
+      </div>
+      <div class="shop-container">
+        <!-- left-side-menu -->
+        <div class="menu">
+          <!-- left-side-sub-menus -->
+          <div >
+            <h4 style="font-weight: 450;">Categories</h4>
+            <div class="sub-menu ml-4">
+              <a><span id="display-menu" class="display-menu">COVID-19</span></a>
+              <br />
+              <div class="ml-3">
+                <small style="font-weight: 300;">MASKS</small>
+                <br />
+                <small style="font-weight: 300;">SANITIZERS</small>
+              </div>
+            </div>
+            <div class="sub-menu ml-4">
+              <span id="display-menu" class="display-menu">FOODSTUFFS</span>
+              <br />
+              <div class="ml-3">
+                <small style="font-weight: 300;">MASKS</small>
+                <br />
+                <small style="font-weight: 300;">SANITIZERS</small>
+              </div>
+            </div>
+            <div class="sub-menu ml-4">
+              <span id="display-menu" class="display-menu">MENS CLOTHING</span>
+              <br />
+              <div class="ml-3">
+                <small style="font-weight: 300;">MASKS</small>
+                <br />
+                <small style="font-weight: 300;">SANITIZERS</small>
+              </div>
+            </div>
+            <div class="sub-menu ml-4">
+              <span>LADIES CLOTHING</span>
+              <br />
+              <div class="ml-3">
+                <small style="font-weight: 300;">MASKS</small>
+                <br />
+                <small style="font-weight: 300;">SANITIZERS</small>
+              </div>
+            </div>
+            <div class="sub-menu ml-4">
+              <span id="display-menu" class="display-menu">UTENSILS</span>
+              <br />
+              <div class="ml-3">
+                <small style="font-weight: 300;">MASKS</small>
+                <br />
+                <small style="font-weight: 300;">SANITIZERS</small>
+              </div>
+            </div>
+            <div class="sub-menu ml-4">
+              <span id="display-menu" class="display-menu">KITCHENWEAR</span>
+              <br />
+              <div class="ml-3">
+                <small style="font-weight: 300;">MASKS</small>
+                <br />
+                <small style="font-weight: 300;">SANITIZERS</small>
+              </div>
+            </div>
+            <div class="sub-menu ml-4">
+              <span id="display-menu" class="display-menu">ELECTRICALS</span>
+              <br />
+              <div class="ml-3">
+                <small style="font-weight: 300;">MASKS</small>
+                <br />
+                <small style="font-weight: 300;">SANITIZERS</small>
+              </div>
+            </div>
+            <div class="sub-menu ml-4">
+              <span id="display-menu" class="display-menu">ELECTRONICS</span>
+              <br />
+              <div class="ml-3">
+                <small style="font-weight: 300;">MASKS</small>
+                <br />
+                <small style="font-weight: 300;">SANITIZERS</small>
+              </div>
+            </div>
+            <div class="sub-menu ml-4">
+              <span id="display-menu" class="display-menu">FURNITURE</span>
+              <br />
+              <div class="ml-3">
+                <small style="font-weight: 300;">MASKS</small>
+                <br />
+                <small style="font-weight: 300;">SANITIZERS</small>
+              </div>
+            </div>
+            <div class="sub-menu ml-4">
+              <span id="display-menu" class="display-menu">HOME & OFFICE</span>
+              <br />
+              <div class="ml-3">
+                <small style="font-weight: 300;">MASKS</small>
+                <br />
+                <small style="font-weight: 300;">SANITIZERS</small>
+              </div>
+            </div>
+          </div>
+          <!-- left-side-sub-menus -->
+
+          <!-- Search form -->
+          <div>
+            <h5 style="font-weight: 400;" class="mt-4">Search here...</h5>
+            <form class="form-inline active-cyan-4">
+              <input class="form-control form-control-sm mr-3 w-75" type="text" placeholder="Search"
+                aria-label="Search">
+              <i class="fas fa-search" aria-hidden="true"></i>
+            </form>
+          </div>
+          <!-- Search form -->
+
+          <!-- Customer review -->
+          <div>
+            <h6 style="font-weight: 450;" class="mt-4">Avg customer review</h6>
+            <p>
+              <span><i class="fas fa-star text-primary"></i></span>
+              <span><i class="fas fa-star text-primary"></i></span>
+              <span><i class="fas fa-star text-primary"></i></span>
+              <span><i class="fas fa-star text-primary"></i></span>
+              <span><i class="fas fa-star text-primary"></i></span>
+              <small class="text-muted ml-5">MOST RATED</small>
+            </p>
+            <p>
+              <span><i class="fas fa-star text-primary"></i></span>
+              <span><i class="fas fa-star text-primary"></i></span>
+              <span><i class="fas fa-star text-primary"></i></span>
+              <span><i class="fas fa-star text-primary"></i></span>
+              <span><i class="far fa-star text-primary"></i></span>
+              <small class="text-muted ml-5">FAVOURITES</small>
+
+            </p>
+            <p>
+              <span><i class="fas fa-star text-primary"></i></span>
+              <span><i class="fas fa-star text-primary"></i></span>
+              <span><i class="fas fa-star text-primary"></i></span>
+              <span><i class="far fa-star text-primary"></i></span>
+              <span><i class="far fa-star text-primary"></i></span>
+              <small class="text-muted ml-4">MOST LIKED PRODUCTS</small>
+            </p>
+          </div>
+          <!-- Customer review -->
+
+          <!-- price-radio-select -->
+          <div>
+            <div class="custom-control custom-radio mt-4">
+              <input type="radio" class="custom-control-input" id="defaultUnchecked" name="defaultExampleRadios">
+              <label class="custom-control-label text-muted" for="defaultUnchecked">Under $10</label>
+            </div>
+            <div class="custom-control custom-radio mt-3">
+              <input type="radio" class="custom-control-input" id="defaultUnchecked" name="defaultExampleRadios">
+              <label class="custom-control-label text-muted" for="defaultUnchecked">Price $10 - $20</label>
+            </div>
+            <div class="custom-control custom-radio mt-3">
+              <input type="radio" class="custom-control-input" id="defaultUnchecked" name="defaultExampleRadios">
+              <label class="custom-control-label text-muted" for="defaultUnchecked">Price $20 - $50</label>
+            </div>
+            <div class="custom-control custom-radio mt-3">
+              <input type="radio" class="custom-control-input" id="defaultUnchecked" name="defaultExampleRadios">
+              <label class="custom-control-label text-muted" for="defaultUnchecked">Price $50 - $100</label>
+            </div>
+            <div class="custom-control custom-radio mt-3">
+              <input type="radio" class="custom-control-input" id="defaultUnchecked" name="defaultExampleRadios">
+              <label class="custom-control-label text-muted" for="defaultUnchecked">Above $100</label>
+            </div>
+          </div>
+          <!-- price-radio-select -->
+
+          <!-- price input range -->
+          <div style="display: flex;">
+            <div class="md-form md-outline form-sm" style="width: 40%;">
+              <input id="form-sm" class="form-control form-control-sm" type="text">
+              <label for="form-sm">Min price</label>
+            </div>
+            <div style="width: 10%;font-size:40px;" class="pt-2 text-center">
+              -
+            </div>
+            <div class="md-form md-outline form-sm" style="width: 40%;">
+              <input id="form-sm" class="form-control form-control-sm" type="text">
+              <label for="form-sm">Max price</label>
+            </div>
+          </div>
+          <!-- price input range -->
+        </div>
+        <!-- left-side-menu -->
+
+        <!-- right side -->
+        <div class="shop-content">
+          <div class="header-paragraph">
+            <p class="text-center">
+              <a class="text-muted" href="{% url 'shop_list' %}">
+                <span><i class="fas fa-th-list fa-2x mr-1"></i></span>
+              </a>
+              <a class="text-muted" href="{% url 'shop' %}">
+                <span><i class="fas fa-th-large fa-2x"></i></span>
+              </a>
+              <span>
+                <div style="width: 300px;" class="md-form md-outline form-sm mt-0 pt-0">
+                  <input list="list-options" id="form-sm" class="form-control form-control-sm" type="text">
+                  <datalist id="list-options">
+                    <option value="New products"></option>
+                    <option value="Trending"></option>
+                    <option value="Most rated"></option>
+                    <option value="Must-haves"></option>
+                  </datalist>
+                  <label for="form-sm">Sort by</label>
+                </div>
+              </span>
+              <span>
+                <nav>
+                  <ul class="pagination pg-blue">
+                    <li class="page-item">
+                      <a class="page-link" aria-label="Previous">
+                        
+                        <span aria-hidden="true"><i class="fas fa-angle-left"></i></span>
+                        <span class="sr-only">Previous</span>
+                      </a>
+                    </li>
+                    <li class="page-item"><a class="page-link">2</a></li>
+                    <li class="page-item active rounded"><a class="page-link">1</a></li>
+                    <li class="page-item"><a class="page-link">3</a></li>
+                    <li class="page-item">
+                      <a class="page-link" aria-label="Next">
+                        <span aria-hidden="true"><i class="fas fa-angle-right"></i></span>
+                        <span class="sr-only">Next</span>
+                      </a>
+                    </li>
+                  </ul>
+                </nav>
+              </span>
+            </p>
+          </div>
+
+          <!-- image row -->
+          <div class="shop-img-list row">
+            {% for item in items %}
+              <div class="shop-list-div mb-5">
+                <div class="shop-list-img">
+                  <img src="{{item.image.url}}" class="shop-image rounded">
+                </div>
+                <div style="width: 5%;">
+                </div>
+                <div class="shop-list-info">
+                  <p style="font-weight: 400; font-size:23px;">{{item.title}}<span class="float-right mr-5 pr-3">$200</span> </p>
+                  <p>{{item.description}}</p>
+                  <a href="{% url 'detail' item.slug %}" class="btn btn-primary btn-sm rounded "><i class="fas fa-cart-plus"></i></a>
+                  <a href="#" class="btn btn-outline btn-sm rounded "><i class="fas fa-info-circle mr-2"></i>DETAILS</a>
+                  <button class="btn btn-danger btn-sm rounded text-centre ml-0"><i class="far fa-heart"></i></button>
+                </div>
+              </div>
+            {% endfor %}
+          </div>
+          <!-- image row -->
+          
+        </div>
+        <!-- right side -->
+      </div>
+    </section>
+  </div>
+</main>
+
+{% endblock content %}
+

@@ -1,0 +1,335 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<style>
+.accept-img{
+  width: 70px;
+  height: 70px;
+}
+.master{
+  width: 70px;
+  height: 50px;
+}
+.paypal{
+  width: 70px;
+  height: 45px;
+}
+.mpesa, .paypal, .master{
+  margin-left: 20px;
+}
+.card .btn-container{
+  width: 95%;
+  margin: 2em auto;
+}
+
+.paypal-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+
+.button {
+border: none;
+border-radius: 4px;
+outline: none;
+text-decoration: none;
+color: #fff;
+background: #32325d;
+white-space: nowrap;
+display: inline-block;
+height: 40px;
+padding: 0 14px;
+box-shadow: 0 4px 6px rgba(50, 50, 93, 0.11), 0 1px 3px rgba(0, 0, 0, 0.08);
+font-size: 15px;
+font-weight: 600;
+letter-spacing: 0.025em;
+text-decoration: none;
+-webkit-transition: all 150ms ease;
+transition: all 150ms ease;
+margin: 10px auto 1em auto;
+width: 100%;
+margin-left: auto;
+transition: 0.5s;
+}
+
+.button:hover {
+transform: translateY(-1px);
+transform: scale(1.05);
+box-shadow: 0 7px 14px rgba(50, 50, 93, 0.1), 0 3px 6px rgba(0, 0, 0, 0.08);
+background-color: #43458b;
+}
+
+.StripeElement {
+height: 40px;
+width: 100%;
+margin: 0 auto;
+padding: 10px 12px;
+border: 1px solid transparent;
+border-radius: 4px;
+background-color: white;
+
+box-shadow: 0 1px 3px 0 #e6ebf1;
+-webkit-transition: box-shadow 150ms ease;
+transition: box-shadow 150ms ease;
+}
+
+.StripeElement--focus {
+box-shadow: 0 1px 3px 0 #cfd7df;
+}
+
+.StripeElement--invalid {
+border-color: #fa755a;
+}
+
+.StripeElement--webkit-autofill {
+background-color: #fefde5 !important;
+}
+.form-row{
+  width: 100%;
+}
+</style>
+
+<script src="https://www.paypal.com/sdk/js?client-id=Aeb3XEedAFGsm2vdZrGtEkf12GuVtjhbhqCtMxDz_IXitJIZ2NcVONizR4LvszqDoDsJIvZvgCdFjFD-&currency=USD"></script>
+<script src="https://js.stripe.com/v3/"></script>
+
+
+<main class="mb-5">
+  <div class="container wow fadeIn">
+    <h2 class="h2 text-center mt-5 mb-5">Complete your order</h2>
+    <div class="row">
+      <div class="col-md-8 mb-4">
+        <div class="card">
+
+          <div class="btn-container">
+            <form method="POST" id="payment-form">
+              {% csrf_token %}
+              <div class="form-row">
+                <label class="card-element" for="card-element">
+                  Credit or debit card
+                </label>
+                <div id="card-element"></div>
+                <div id="card-errors" role="alert"></div>
+              </div>
+              <button class="button mb-5">Submit Payment</button>
+            </form>
+            <b><h6><strong>Paypay payment options</strong></h6></b>
+            <div id="paypal-button-container" class="paypal-container"></div>
+          </div>
+
+
+        </div>
+
+        <div class="card mt-4" style="padding: 25px;">
+          <h5><b>Expected delivery time</b></h5>
+          <h6 class="mt-2 text-muted"><strong> {{order.ordered_date}} - {{order.ordered_date}}</strong></h6>
+        </div>
+
+        <div class="card mt-4" style="padding: 25px 25px 0 25px">
+          <h5><b>We accept</b></h5>
+          <p>
+            <span><img class="accept-img" src="{% static 'assets/visa.png' %}" alt=""></i></span>
+            <span><img class="master" src="{% static 'assets/master.png' %}" alt=""></i></span>
+            <span><img class="paypal" src="{% static 'assets/paypal.png' %}" alt=""></i></span>
+            <span><img class="accept-img mpesa" src="{% static 'assets/mpesa.png' %}" alt=""></i></span>
+          </p>
+        </div>
+      </div>
+      <!--Grid column-->
+
+      <!--Grid column-->
+      <div class="col-md-4 mb-4">
+        <h4 class="d-flex justify-content-between align-items-center mb-3">
+        <span class="text-muted">Your cart</span>
+        <span class="badge badge-secondary badge-pill">1</span>
+        </h4>
+        <ul class="list-group mb-3 z-depth-1">
+          <h5 style="font-weight: 400; padding:10px;">Your order summary</h5>
+          <li class="list-group-item d-flex justify-content-between lh-condensed">
+              <div>
+              <h6 style="font-weight: 400;" class="my-0">
+                  3 x Product title
+              </h6>
+              <small class="text-muted">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Cumque, corporis.</small>
+              </div>
+              <span class="text-muted"><b>$200</b></span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between">
+            <span>
+              <strong>Shipping fees</strong> 
+            </span>
+            <span>
+              <strong class="float-right">$200</strong>
+            </span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between bg-light">
+          <div class="text-success">
+              <h6 style="font-weight: 450;" class="my-0">Promo code</h6>
+              <small style="font-weight: 450;">TEST</small>
+          </div>
+          <span class="text-success"><b>-$30</b></span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between">
+            <span>
+              <strong>Total (USD)</strong>
+              <br>
+              <small>(including VAT)</small>
+            </span>
+            <strong class="mt-3">$200</strong>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</main>
+
+<!-- PAYPAL PAYMENTS -->
+<script>
+
+  function getCookie(name) {
+    var cookieValue = null;
+    if (document.cookie && document.cookie !== "") {
+      var cookies = document.cookie.split(";");
+      for (var i = 0; i < cookies.length; i++) {
+        var cookie = cookies[i].trim();
+        // Does this cookie string begin with the name we want?
+        if (cookie.substring(0, name.length + 1) === name + "=") {
+          cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+          break;
+        }
+      }
+    }
+    return cookieValue;
+  }
+
+  var csrftoken = getCookie("csrftoken");
+  var order_id = "{{order.id}}";
+  var total = '{{order.get_total}}'
+  var home = "{% url 'home' %}"
+
+  function completeOrder() {
+    var url = "{% url 'payment_complete' %}";
+    
+    fetch(url, {
+      method: "POST",
+      headers: {
+        "Content-type": "application/json",
+        "X-CSRFToken": csrftoken,
+      },
+      body: JSON.stringify({ 'order_id': order_id }),
+    });
+  }
+
+  paypal
+    .Buttons({
+      style: {
+        color: "blue",
+        shape: "pill",
+        label: "pay",
+        height: 50,
+      },
+
+      // Set up the transaction
+      createOrder: function (data, actions) {
+        return actions.order.create({
+          purchase_units: [
+            {
+              amount: {
+                value: total,
+              },
+            },
+          ],
+        });
+      },
+
+      onApprove: function (data, actions) {
+        return actions.order.capture().then(function (details) {
+          completeOrder();
+          alert(
+            "Transaction completed by " + details.payer.name.given_name + "!"
+          );
+          window.location.replace(home);
+        });
+      },
+    })
+    .render("#paypal-button-container");
+</script>
+<!-- PAYPAL PAYMENTS -->
+
+<!-- STRIPE PAYMENTS -->
+<script>
+  // Create a Stripe client.
+  var stripe = Stripe("pk_test_WzJ72pb880OTIKZJyL0IseTs0015Rpv8wG");
+
+  // Create an instance of Elements.
+  var elements = stripe.elements();
+
+  // Custom styling can be passed to options when creating an Element.
+  // (Note that this demo uses a wider set of styles than the guide below.)
+  var style = {
+    base: {
+      color: "#32325d",
+      fontFamily: '"Helvetica Neue", Helvetica, sans-serif',
+      fontSmoothing: "antialiased",
+      fontSize: "16px",
+      "::placeholder": {
+        color: "#aab7c4",
+      },
+    },
+    invalid: {
+      color: "#fa755a",
+      iconColor: "#fa755a",
+    },
+  };
+
+  // Create an instance of the card Element.
+  var card = elements.create("card", { style: style });
+
+  // Add an instance of the card Element into the `card-element` <div>.
+  card.mount("#card-element");
+
+  // Handle real-time validation errors from the card Element.
+  card.on("change", function (event) {
+    var displayError = document.getElementById("card-errors");
+    if (event.error) {
+      displayError.textContent = event.error.message;
+    } else {
+      displayError.textContent = "";
+    }
+  });
+
+  // Handle form submission.
+  var form = document.getElementById("payment-form");
+  form.addEventListener("submit", function (event) {
+    event.preventDefault();
+
+    stripe.createToken(card).then(function (result) {
+      if (result.error) {
+        // Inform the user if there was an error.
+        var errorElement = document.getElementById("card-errors");
+        errorElement.textContent = result.error.message;
+      } else {
+        // Send the token to your server.
+        stripeTokenHandler(result.token);
+      }
+    });
+  });
+
+  // Submit the form with the token ID.
+  function stripeTokenHandler(token) {
+    // Insert the token ID into the form so it gets submitted to the server
+    var form = document.getElementById("payment-form");
+    var hiddenInput = document.createElement("input");
+    hiddenInput.setAttribute("type", "hidden");
+    hiddenInput.setAttribute("name", "stripeToken");
+    hiddenInput.setAttribute("value", token.id);
+    form.appendChild(hiddenInput);
+
+    // Submit the form
+    form.submit();
+  }
+</script>
+<!-- STRIPE PAYMENTS -->
+
+{% endblock content %}

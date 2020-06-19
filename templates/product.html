@@ -1,0 +1,189 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<style>
+ .label{
+  position: absolute;
+  left: 20px;
+  top: 20px;
+  z-index: 2;
+}
+.label-right{
+  position: absolute;
+  background-color: rgba(240, 240, 100, 0.842) !important;
+  color: black !important;
+  right: 20px;
+  top: 20px;
+  z-index: 2;
+}
+.badge-right {
+  position: absolute;
+  right: 0;
+  top: 0;
+  height:25px;
+  width: 38px;
+  background-color: rgba(199, 207, 81, 0.884);
+  z-index: 2;
+  transition: 0.5s;
+}
+.cat-image{
+  position: relative;
+  width: 293px;
+  height: 193px;
+  margin-bottom: 40px;
+}
+.categories .cat-image h3{
+  position: absolute;
+  color: white;
+  font-weight: 400;
+  bottom: 0;
+  right: 10px;
+  z-index: 2;
+}
+</style>
+
+
+<main class="mt-5 pt-4 mb-4">
+  <div class="container">
+    <section class="mt-5 wow fadeIn">
+      <div class="row">
+        <div class="img-div">
+          <div class="det-img">
+            <img src="{{object.image.url}}" class="rounded detail-img active" id="main-img">
+          </div>
+
+          <div class="ass-img">
+            <img class="ass-image rounded var-img active" src="{% static 'assets/sweater.jpg' %}" id="var-img" >
+            <img class="ass-image rounded var-img" src="{% static 'assets/hoodie.jpg' %}" id="var-img" >
+            <img class="ass-image rounded var-img" src="{% static 'assets/denim.jpg' %}" id="var-img" >
+          </div>
+
+        </div>
+
+        <div class="desc-div">
+          <h4 style="font-weight: 400;"><b>{{object.title}}</b></h4>
+          <p class="text-muted">
+            <span>{{object.category|upper}}</span>
+            <span style="font-weight: 450;" class="ml-4"><b>$200</b></span>
+          </p>
+          <p class="mt-0">
+            <i class="fas fa-star cyan-text"></i>
+            <i class="fas fa-star cyan-text"></i>
+            <i class="fas fa-star cyan-text"></i>
+            <i class="fas fa-star cyan-text"></i>
+            <i class="fas fa-star cyan-text"></i>
+          </p>
+          <p>{{object.description}}</p>
+          <p><b>Size:</b> <span class="ml-5"><b>S M L XL</b></span></p>
+          <p><b>Material:</b> <span class="ml-5">Linen</span></p>
+          <p><b>Color:</b> <span class="ml-5"><b>Blue Red Green White</b></span></p>
+
+          <!-- <form method="POST">
+            {% csrf_token %}
+            <p class="d-flex justify-content-around">
+              <select style="width: 200px;" class="browser-default custom-select">
+                <option selected>Choose a color</option>
+                <option value="1">One</option>
+                <option value="2">Two</option>
+                <option value="3">Three</option>
+              </select>
+              <select style="width: 200px;" class="browser-default custom-select">
+                <option selected>Choose a size</option>
+                <option value="1">One</option>
+                <option value="2">Two</option>
+                <option value="3">Three</option>
+              </select>
+              <select style="width: 200px;" class="browser-default custom-select">
+                <option selected>Choose a material</option>
+                <option value="1">One</option>
+                <option value="2">Two</option>
+                <option value="3">Three</option>
+              </select>
+            </p>
+            <p>
+              Quantity
+              <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
+                <button id="minus" class="btn btn-info px-3 rounded mr-0 ml-0"><i class="fas fa-minus" aria-hidden="true"></i></button>
+                <button style="background: none; outline:none; border:none" class="mr-0 ml-0 pl-0 pr-0"><input id="input-field" class="input-field text-center" type="text" value="1"></button>
+                <button id="plus" class="btn btn-info px-3 rounded ml-0 pl-0"><i class="fas fa-plus" aria-hidden="true"></i></button>
+              </div>
+            </p>
+            <p>
+              <button type="submit" class="btn btn-primary rounded btn-sm ml-0 px-3"><i class="fas fa-phone-alt mr-2"></i>CALL TO ORDER</button>
+              <button type="submit" class="btn btn-outline rounded btn-sm px-3"><i class="fas fa-shopping-cart mr-2"></i> ADD TO CART</button>
+            </p>
+          </form> -->
+          <p>
+            <button type="submit" class="btn btn-primary rounded btn-sm ml-0 px-3"><i class="fas fa-phone-alt mr-2"></i>CALL TO ORDER</button>
+            <a href="{{object.get_add_to_cart_url}}" class="btn btn-outline rounded btn-sm px-3"><i class="fas fa-shopping-cart mr-2"></i> ADD TO CART</a>
+          </p>
+
+        </div>
+      </div>
+
+
+      <h4 class="section-title mt-5 pt-4">Our latest collection</h4>
+      <div class="row latest">
+        {% for item in items %}
+          <div class="latest-image">
+            <img class="latest-img rounded text-center" src="{{item.image.url}}" alt="">
+            <p class="text-center" style="font-weight: 400; font-size:23px;">{{item.title}}
+              <br>
+              <b>${{item.discount_price}}</b>
+            </p>
+            <p class="text-center">
+              <button class="btn btn-primary rounded btn-sm"><i class="fas fa-shopping-cart"></i> ADD TO CART</button>
+              <button class="btn btn-danger rounded btn-sm"><i class="far fa-heart"></i></button>
+            </p>
+          </div>
+        {% endfor %}  
+      </div>
+    </section>
+  </div>
+</main>
+
+
+<script>
+var plusBtn = document.getElementById('plus')
+var minusBtn = document.getElementById('minus')
+var inputField = document.getElementById('input-field')
+var mainImg = document.getElementById('main-img')
+var varImgs = document.getElementsByClassName('var-img')
+var activeImgs = document.getElementsByClassName('active')
+
+
+plusBtn.addEventListener('click', function(e){
+  e.preventDefault();
+  inputField.value++
+})
+minusBtn.addEventListener('click', function(e){
+  e.preventDefault();
+  inputField.value--
+})
+
+for (var i=0; i < varImgs.length; i++){
+  varImgs[i].addEventListener('click', function(){
+    if (activeImgs.length>0){
+      activeImgs[0].classList.remove('active')
+    }
+    this.classList.add('active')
+    mainImg.src = this.src
+  })
+}
+for (var i=0; i<varImgs.length; i++){
+  varImgs[i].addEventListener('mouseover', function(){
+    if (activeImgs.length>0){
+      activeImgs[0].classList.remove('active')
+    }
+    this.classList.add('active')
+    mainImg.src = this.src
+  })
+}
+
+
+</script>
+{% endblock content %}
+
+ 

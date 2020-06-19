@@ -1,0 +1,85 @@
+{% extends 'base.html' %} {% load crispy_forms_tags %} {% block content %}
+<main>
+  <style>
+      .sm-img{
+          width: 50px;
+          height: 50px;
+          border-radius: 10px;
+      }
+    .content-section {
+      background: #ffffff;
+      padding: 10px 20px;
+      border: 1px solid #dddddd;
+      border-radius: 3px;
+      margin-bottom: 20px;
+    }
+    .account-img {
+      height: 125px;
+      width: 125px;
+      margin-right: 20px;
+      margin-bottom: 16px;
+    }
+
+    .account-heading {
+      font-size: 2.5rem;
+    }
+  </style>
+
+  <div class="content-section">
+    <div class="media">
+      <img class="rounded-circle account-img" src="" />
+      <div class="media-body">
+        <h2 class="account-heading">{{user.username}}</h2>
+        <p class="text-secondary">{{user.email}}</p>
+      </div>
+    </div>
+
+    <div class="table-responsive text-nowrap">
+      <h3>Order Summary</h3>
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col"></th>
+            <th scope="col">Item</th>
+            <th scope="col">Quantity</th>
+            <th scope="col">Amount</th>
+            <th scope="col">Date paid</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for order in orders %}
+            <tr>
+              <!-- should  be for order_item in order.items.all -->
+              {% for item in order.items.all %}
+                  <td>
+                      <img class="sm-img" src="{{item.item.image.url}}" alt="">
+                  </td>
+                  <td>{{item.item.title}}</td>
+              {% endfor %}
+
+              {% for item in order.items.all %}
+                  <td>{{item.quantity}}</td>
+              {% endfor %}
+
+              <td>{{order.payment.amount}}</td>
+              <td>
+                  <p>
+                  {{order.payment.timestamp}}
+                  <br>
+                  
+                  {% if order.received %}
+                      <span style="font-weight: 400;" class="text-success"><i class="fas fa-check-circle green-text ml-5"></i><b>DELIVERED</b></span>
+                  {% else %}
+                      <span style="font-weight: 400;" class="text-success"><strong>SORTING FOR DELIVERY</strong></span>
+                  {% endif %}
+                  </p>
+              </td>
+            </tr>
+          {% endfor %}
+          <tr></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</main>
+{% endblock content %}

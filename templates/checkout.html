@@ -1,0 +1,80 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<main>
+  <div class="container wow fadeIn">
+    <h2 class="h2">Fill in your details</h2>
+    <div class="row">
+      
+      <div class="col-md-8 mb-4">
+        <div class="card">
+          <form class="card-body" method="POST">
+            {% csrf_token %}
+            <div class="md-form mb-5">
+              <input required type="text" id="address" name="street_address" class="form-control" placeholder="1234 Main St">
+              <label for="address" class="">Address</label>
+            </div>
+
+            <div class="md-form mb-5">
+              <input required type="text" id="address-2" name="apartment_address" class="form-control" placeholder="Apartment or suite">
+              <label for="address-2" class="">Address 2 (optional)</label>
+            </div>
+
+            <div class="row">
+              <div class="col-lg-4 col-md-12 mb-4">
+                <label for="country">Country</label>
+                {{form.country}}
+                <div class="invalid-feedback">
+                  Please select a valid country.
+                </div>
+              </div>
+
+              <div class="col-lg-4 col-md-6 mb-4">
+                <label for="zip">Zip</label>
+                <input type="text" class="form-control" id="zip" name="zip" placeholder="Zipcode...">
+                <div class="invalid-feedback">
+                  Zip code required.
+                </div>
+              </div>
+            </div>
+
+            <hr>
+
+            <!-- <div class="custom-control custom-checkbox">
+              <input type="checkbox" class="custom-control-input" id="save_info" name="save_info">
+              <label class="custom-control-label" for="save_info">Save this information for next time</label>
+            </div>
+            {% if address %}
+              <div class="custom-control custom-checkbox">
+                <input type="checkbox" class="custom-control-input" id="use_default" name="use_default">
+                <label class="custom-control-label" for="use_default">Use default shipping address: {{ address.street_address }}, {{ address.apartment_address }}</label>
+              </div>
+            {% endif %} -->
+
+            <!-- <hr> -->
+
+            <div class="d-block my-3">
+              <div class="custom-control custom-radio">
+                <input id="credit" name="payment_option" value="S" type="radio" class="custom-control-input"  required>
+                <label class="custom-control-label" for="credit">Stripe</label>
+              </div>
+              <div class="custom-control custom-radio">
+                <input id="paypal" name="payment_option" value="P" type="radio" class="custom-control-input" required>
+                <label class="custom-control-label" for="paypal">Paypal</label>
+              </div>
+            </div>
+            <hr class="mb-4">
+            <button class="btn btn-outline-info btn-lg btn-block" type="submit">Continue to checkout</button>
+          </form>
+        </div>
+      </div>
+
+
+      <div class="col-md-4 mb-4">
+        {% include "order_snippet.html" %}
+      </div>
+
+    </div>
+  </div>
+</main>
+{% endblock content %}
